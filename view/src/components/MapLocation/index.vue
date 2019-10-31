@@ -6,6 +6,9 @@
       scrollable
     >告示：该页面为个人学习演示项目，不涉及任何商业应用，仅限技术学习请勿传播，开发者邮箱:man@wwenj.com</md-notice-bar>
     <div id="map"></div>
+    <div class="btnBack">
+      <backbutton></backbutton>
+    </div>
     <div class="map-tool">
       <p @click="popupShowOnClick">
         <svg-icon icon-class="city"/>
@@ -92,6 +95,7 @@ import { Toast } from 'mand-mobile'
 import { setInterval, clearInterval } from 'timers'
 import { getTime } from 'utils/validate.js'
 import { mapActions } from 'vuex'
+import backbutton from './conponents/backButton'
 export default {
   name: 'mapLocation',
   data () {
@@ -130,6 +134,9 @@ export default {
       distance: 0, // 当前移动公里数
       tripType: '徒步' // 出行方式
     }
+  },
+  components: {
+    backbutton
   },
   computed: {
     // 时分秒，计时器
@@ -251,7 +258,11 @@ export default {
         },
         function () {
           Toast.failed('实时定位出错，请尝试刷新')
-          that.mapOnDelete()
+          this.mapOnDelete()
+        },
+        {
+          enableHighAccuracy:true,
+          timeout:3000
         }
       )
     },
@@ -426,6 +437,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.btnBack{
+  position: fixed;
+  top:5%;
+  left: 2%;
+}
 .map {
   width: 100vw;
   height: 100vh;

@@ -11,7 +11,7 @@ var data = {
 var pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '8151186051',
+  password: 'gdmap',
   database: 'trip'
 });
 router.post('/', function (req, res, next) {
